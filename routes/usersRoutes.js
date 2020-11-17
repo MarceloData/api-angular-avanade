@@ -1,8 +1,14 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
+const UsersController = require("../controllers/UsersController");
+const login = require("../validators/login");
 
-router.get('/', (req,res) => {
-    res.send('From API route')
-})
+router.post("/login", login.validate);
+
+router.get("/", UsersController.getAll);
+router.get("/:id", UsersController.get);
+router.post("/register", UsersController.create);
+router.put("/update/:id", UsersController.update);
+router.delete("/delete/:id", UsersController.delete);
 
 module.exports = router;
